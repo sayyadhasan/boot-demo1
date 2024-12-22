@@ -28,6 +28,22 @@ public class CollectorsPractice {
 
         persons.stream().filter(p -> p.getAge() > 64).forEach(System.out::println);
 
+        // parallel stream helps reduce time by 6 just to print 100k. Linear stream took 126 seconds
+        // while parallel stream took 20 seconds
+        long l = System.currentTimeMillis();
+        persons.stream()
+                .parallel()
+                .forEach(p -> {
+                    System.out.println(p);
+                    try {
+                        Thread.sleep(1 );
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+        long l1 = System.currentTimeMillis();
+        System.out.println("time taken = " + (l1-l));
+
 
     }
 
